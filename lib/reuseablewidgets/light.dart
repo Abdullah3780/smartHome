@@ -1,23 +1,29 @@
+import 'package:bcj/screens/LightPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Light extends StatefulWidget {
+class Light extends StatelessWidget {
   String sceneName;
-
+  bool showlighpage;
+  BuildContext ctx;
   // IconData sceneIconData;
-
+  void Function(bool val) onPressed;
   bool value;
 
-  Light({Key? key, required this.sceneName, required this.value})
+  Light(
+      {Key? key,
+      required this.sceneName,
+      required this.value,
+      required this.showlighpage,
+      required this.onPressed,
+      required this.ctx})
       : super(key: key);
 
-  @override
-  State<Light> createState() => _LightState();
-}
+  String onOrOff = 'Off';
 
-class _LightState extends State<Light> {
   @override
   Widget build(BuildContext context) {
+    context = ctx;
     return Container(
       height: MediaQuery.of(context).size.height * 0.105,
       width: MediaQuery.of(context).size.width * 0.3,
@@ -39,26 +45,23 @@ class _LightState extends State<Light> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.sceneName,
+                sceneName,
                 style: TextStyle(
                     color: Color(0xffAEBABF), fontWeight: FontWeight.bold),
               ),
               Text(
-                'Off',
+                value == true ? 'On' : 'Off',
                 style: TextStyle(
                   color: Color(0xff677A86),
                 ),
               ),
               CupertinoSwitch(
-                  activeColor: Color(0XFFA9A9A9),
-                  value: widget.value,
-                  trackColor: Color(0xff1B1D1F),
-                  thumbColor: Color(0xff242628),
-                  onChanged: (val) {
-                    setState(() {
-                      widget.value = val;
-                    });
-                  }),
+                activeColor: Color(0XFFA9A9A9),
+                value: value,
+                trackColor: Color(0xff1B1D1F),
+                thumbColor: Color(0xff242628),
+                onChanged: onPressed,
+              ),
             ]),
       ),
     );

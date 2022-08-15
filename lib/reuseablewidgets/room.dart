@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Room extends StatelessWidget {
   String roomtype;
+  bool selected;
   String noOfDevices;
   IconData iconData;
   GestureDetector? onTap;
@@ -11,6 +12,7 @@ class Room extends StatelessWidget {
       required this.roomtype,
       required this.noOfDevices,
       required this.iconData,
+      required this.selected,
       this.onTap})
       : super(key: key);
 
@@ -28,16 +30,19 @@ class Room extends StatelessWidget {
             right: MediaQuery.of(context).size.width * 0.02),
         height: MediaQuery.of(context).size.height * 0.075,
         width: MediaQuery.of(context).size.width * 0.35,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-              color: Colors.black54,
-              blurRadius: 8,
-              // spreadRadius: -12.0,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 8,
+                  // spreadRadius: -12.0,
 
-              // spreadRadius: 1,
-              offset: Offset(0, 6)),
-          // BoxShadow(color: Colors.white, blurRadius: 8, spreadRadius: -),
-        ], borderRadius: BorderRadius.circular(6), color: Color(0xff4248C7)),
+                  // spreadRadius: 1,
+                  offset: Offset(0, 6)),
+              // BoxShadow(color: Colors.white, blurRadius: 8, spreadRadius: -),
+            ],
+            borderRadius: BorderRadius.circular(6),
+            color: selected == true ? Color(0xff4248C7) : Color(0xff313336)),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Column(
